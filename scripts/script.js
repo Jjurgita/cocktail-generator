@@ -1,7 +1,8 @@
-// NAV BAR HAMBURGER
+// Nav bar hamburger
 const hamburger = document.getElementById('hamburger');
 const navUL = document.getElementById('nav-ul');
 
+// Calendar
 const cocktailIds = ['178314', '17230', '12198', '17233', '17196', '17194', '17253', '12402', '17207', '15941', '12196', '17213', '11690', '17180', '11113', '11009', '178325', '178336', '11008', '11118', '178340', '11004', '11006', '11001']
 var dayNumber = 0
 
@@ -46,3 +47,32 @@ window.addEventListener('load', () => {
 hamburger.addEventListener('click', () => {
      navUL.classList.toggle('show');
 });
+
+// Clock and date
+
+function realTimeClock() {
+    let rtClock = new Date();
+
+    let hours = rtClock.getHours();
+    let minutes = rtClock.getMinutes();
+    let seconds = rtClock.getSeconds();
+
+    // AM PM
+    let amPm = (hours < 12) ? "AM" : "PM"
+
+    // 12 hour format
+    hours = (hours > 12) ? hours - 12 : hours;
+
+    // Add zeros in front of hours minutes seconds
+    minutes = ("0" + minutes).slice(-2);
+    seconds = ("0" + seconds).slice(-2);
+
+    // Display
+    document.getElementById('clock').innerHTML = hours + " : " + minutes + " : " + seconds + " " + amPm;
+
+    setTimeout(realTimeClock, 1000);
+}
+
+// Run
+
+realTimeClock();

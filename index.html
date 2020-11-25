@@ -4,33 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advent Calendar</title>
+    <link rel="icon" href="./days/martini.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">   
 </head>
 <body>
     <div class="nav">
-        <img class='logo' src='/assets/6.jpg' alt='logo'>
+        <img class='logo' src='./days/6.jpg' alt='logo'>
         <button class="hamburger" id="hamburger">
             <i class="fas fa-bars"></i>
         </button>
         <ul class='nav-ul' id='nav-ul'>
-            <li><a href="#">Search for drink</a></li>
-            <li><a href="#">Build a drink</a></li>
-            <li><a href="#">Something</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Cocktail finder</a></li>
+            <li><a href="#">Home bar</a></li>
+            <li><a href="#">Popular</a></li>
+            <li><a href="#">Converter</a></li>
         </ul>
     </div>
     <div class="container">
-        <div id="clock"></div>
+        <!-- <div id="clock"></div> --> 
         <img src="./days/24.png" alt="24">
-        <p>DAYS of COCKTAILS</p>
-        <span>Advent Calendar</span>
-    </div>
-    <div class="advent-calendar">
-        <div id="single-cocktail-container" class="drinks">
+        <h1>DAYS of COCKTAILS</h1>
+        <h2>Advent Calendar</h2>
+        <div class="advent-calendar">
+            <div id="single-cocktail-container" class="drinks"></div>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/scripts/scriptTime.js"></script>
     <script src="/scripts/script.js"></script>
 </body>
 </html>
