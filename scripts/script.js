@@ -33,6 +33,7 @@ function addCocktailToDOM(dayNumber, drink) {
             </div>
             <div class="card-back">
                 <img class="cocktail" src="${cocktailImage}" alt="${cocktailName}">
+                <h3>${cocktailName}</h3>
             </div>
         </div>
     </div>`
