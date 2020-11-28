@@ -1,79 +1,123 @@
-// Nav bar hamburger
+// NAV BAR HAMBURGER
 const hamburger = document.getElementById('hamburger');
 const navUL = document.getElementById('nav-ul');
 
-// Calendar
-const cocktailIds = ['178314', '17230', '12198', '17233', '17196', '17194', '17253', '12402', '17207', '15941', '12196', '17213', '11690', '17180', '11113', '11009', '178325', '178336', '11008', '11118', '178340', '11004', '11006', '11001']
-var dayNumber = 0
+// HTML DOM
+const search = document.getElementById('search'),
+    submit = document.getElementById('submit'),
+    drinks = document.getElementById('drink-name')
+    resultHeading = document.getElementById('result-heading')
+    single_drink = document.getElementById('single-drink');
 
-const single_cocktail_container = document.getElementById('single-cocktail-container')
-const drinksArray = []
+// SEARCH DRINK AND FETCH API
+function searchDrink(e) {
+    e.preventDefault();
 
-function getCocktail() {
-    for (cocktail of cocktailIds) {
-        fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${cocktail}`)
+    single_drink.innerHTML = '';
+
+    const term = search.value;
+
+    if(term.trim()) {
+        fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${term}`)
             .then(res => res.json())
-            .then(data => {
-                const drink = data.drinks[0];
-                dayNumber += 1
-                addCocktailToDOM(dayNumber, drink)
-            })       
-    };
+            .then(data => {console.log(data)
+            resultHeading.innerHTML = `<h2>Search results for '${term}': </h2>`
+
+            if(data.drinks === null) {
+                drinks.innerHTML = `
+                    <div class='no-result'>
+                        <img src="/assets/1.jpg">
+                    </div>`;
+                resultHeading.innerHTML = `<h2>No results for '${term}'</h2>`
+            }
+            else if(term.length < 3) {
+                drinks.innerHTML = `
+                    <div class='no-result'>
+                        <img src="/assets/1.jpg">
+                    </div>`;
+                resultHeading.innerHTML = `<h2>No results for '${term}'</h2>`
+            } else {
+                drinks.innerHTML = data.drinks.map(drink =>
+                    `<div class='drink'>
+                        <img src="${drink.strDrinkThumb}" alt="${drink.strDrink}"/>
+                        <div class="drink-info" data-drinkID="${drink.idDrink}">
+                            <h3>${drink.strDrink}</h3>
+                        </div>
+                    </div>`
+                )
+                .join('');
+            }
+        });
+        // CLEAR SEARCH AREA
+        search.value = '';
+    } else {
+        resultHeading.innerHTML = `<h2>Fill in the search area!</h2>`
+    }
+}
+// GETTING INFO OF COCKTAIL ON CLICK
+function getDrinkInfo(drinkID) {
+    fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkID}`)
+        .then(res => res.json())
+        .then(data => {
+            const drink = data.drinks[0];
+
+            addDrinkToDOM(drink);
+        });
 }
 
-function addCocktailToDOM(dayNumber, drink) {
-    const cocktailName = drink.strDrink
-    const cocktailImage = drink.strDrinkThumb
+// ADD DRINKS TO DOM
+function addDrinkToDOM(drink) {
+    const ingredients = [];
 
-    single_cocktail_container.innerHTML +=
-        `<div class="flip-card">
-        <div class="flip-card-inner">
-            <div class="card-front">
-                <img class="days-img" src="./days/day${dayNumber}.jpg" alt="${dayNumber}day">
-            </div>
-            <div class="card-back">
-                <img class="cocktail" src="${cocktailImage}" alt="${cocktailName}">
-                <h3>${cocktailName}</h3>
-            </div>
-        </div>
-    </div>`
+    for (let i = 1; i < 15; i++) {
+        if(drink[`strIngredient${i}`] && drink[`strMeasure${i}`] != null) {
+            ingredients.push(`${drink[`strIngredient${i}`]} - ${drink[`strMeasure${i}`]}`)
+        } else if (drink[`strIngredient${i}`] && drink[`strMeasure${i}`] === null){
+            ingredients.push(`${drink[`strIngredient${i}`]}`)
+        } else {
+            break;
+        }
+    }
+    
+    single_drink.innerHTML =
+        `<img class='main-image' src='${drink.strDrinkThumb}' alt='${drink.strDrink}'/>
+        <div class='single-drink-info'>
+            <h1>${drink.strDrink}</h1>
+            <h2>Glass</h2>
+            ${drink.strGlass ? `<p>${drink.strGlass}</p>` : ''}
+            <h2>Method</h2>
+            <p>${drink.strInstructions}</p>
+            <h2>Ingredients</h2>
+            <ul>
+                ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+            </ul>
+        </div>`;
+
+        // GET SENT TO WEB BOTTOM WHERE INFO IS
+        const elmnt = document.getElementById("single-drink");
+        elmnt.scrollIntoView();
 }
 
-//Event listener
+// EVENT LISTENERS
+if (submit != null) {
+    submit.addEventListener('submit', searchDrink)
+};
 
-window.addEventListener('load', () => {
-    getCocktail();
-})
-
-hamburger.addEventListener('click', () => {
-     navUL.classList.toggle('show');
+drinks.addEventListener('click', e => {
+    const drinkInfo = e.path.find(item => {
+        if(item.classList) {
+            return item.classList.contains('drink-info')
+        } else {
+            return false;
+        }
+    });
+    
+    if(drinkInfo) {
+        const drinkID = drinkInfo.getAttribute('data-drinkid');
+        getDrinkInfo(drinkID);
+    }
 });
 
-// Clock and date
-
-function realTimeClock() {
-    let rtClock = new Date();
-
-    let hours = rtClock.getHours();
-    let minutes = rtClock.getMinutes();
-    let seconds = rtClock.getSeconds();
-
-    // AM PM
-    let amPm = (hours < 12) ? "AM" : "PM"
-
-    // 12 hour format
-    hours = (hours > 12) ? hours - 12 : hours;
-
-    // Add zeros in front of hours minutes seconds
-    minutes = ("0" + minutes).slice(-2);
-    seconds = ("0" + seconds).slice(-2);
-
-    // Display
-    document.getElementById('clock').innerHTML = hours + " : " + minutes + " : " + seconds + " " + amPm;
-
-    setTimeout(realTimeClock, 1000);
-}
-
-// Run
-
-realTimeClock();
+hamburger.addEventListener('click', () => {
+    navUL.classList.toggle('show');
+});

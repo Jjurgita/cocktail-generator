@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>24 Days of Cocktails</title>
+    <title>Find a Cocktail</title>
     <link rel="icon" href="/assets/martini.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/calendar.css">
 </head>
 <body>
     <!-- NAVIGATION -->
@@ -24,20 +23,22 @@
             <li><a href="convert.html">Converter</a></li>
         </ul>
     </div>
-    <!-- TIME AND DATE DIV -->
-    <div class="time-date">
-        <div id="date"></div>
-        <div id="clock"></div>
-    </div>
-    <!-- MAIN CONTAINER FOR ADVENT CALENDAR -->
+    <!-- MAIN -->
     <div class="container">
-        <img class="advent-24" src="/assets/days/24.png" alt="24">
-        <h1>DAYS of COCKTAILS</h1>
-        <div class="advent-calendar">
-            <div id="single-cocktail-container" class="drinks"></div>
+        <h1>Find a Cocktail</h1>
+        <!-- SEARCH FORM -->
+        <div class="flex">
+            <form class="flex" id="submit">
+                <input type="text" id="search" placeholder="Enter cocktail name">
+                <button class="btn-search" type="submit"><i class="fa fa-search" aria-hidden="true" style="color: white;"></i></button>
+            </form>
         </div>
+        <!-- DISPLAY COCKTAILS FETCHED FROM API -->
+        <div id="result-heading"></div>
+        <div id="drink-name" class="drinks"></div>
+        <div id="single-drink" class="single-drink"></div>
     </div>
-
-    <script src="/scripts/calendar.js"></script>
+    
+    <script src="/scripts/script.js"></script>
 </body>
 </html>
