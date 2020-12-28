@@ -17,8 +17,6 @@ Furthermore there's active Menu in all pages, so you can go from one page to oth
 
 This project is for educational porpuses only.
 
-Site published at https://jjurgita.github.io/cocktail-generator/
-
 ## Project features
 - responsive design
 - multi-page
