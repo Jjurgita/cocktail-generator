@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
     <!-- NAVIGATION -->
     <div class="nav">
@@ -27,39 +29,38 @@
     <div class="converter">
         <div class="convert-inner" id="ounc">
             <h4>convert ounces to mililitres and centilitres</h3>
-            <p>
-                <label>oz</label>
-                <input class="input" id="inputOunces" type="number" min="0" placeholder="Ounces"
-                oninput="fluidConverter(this.value)" onchange="fluidConverter(this.value)">
-              </p>
-              <p>ml <span class="output" id="outputMililitres"></span></p>
-              <p>cl <span class="output" id="outputCentilitres"></span></p>
-            
+                <p>
+                    <label>oz</label>
+                    <input class="input" id="inputOunces" type="number" min="0" placeholder="Ounces"
+                        oninput="fluidConverter(this.value)" onchange="fluidConverter(this.value)">
+                </p>
+                <p>ml <span class="output" id="outputMililitres"></span></p>
+                <p>cl <span class="output" id="outputCentilitres"></span></p>
         </div>
         <!-- CONVERTER-2 -->
         <div class="convert-inner" id="mil">
             <h4>convert mililitres to ounces and centilitres</h3>
-            <p>
-                <label>ml</label>
-                <input class="input" id="inputMililitres" type="number" min="0" placeholder="Mililitres"
-                oninput="fluidConverter1(this.value)" onchange="fluidConverter1(this.value)">
-              </p>
-              <p>oz <span class="output" id="outputOunces1"></span></p>
-              <p>cl <span class="output" id="outputCentilitres1"></span></p>
+                <p>
+                    <label>ml</label>
+                    <input class="input" id="inputMililitres" type="number" min="0" placeholder="Mililitres"
+                        oninput="fluidConverter1(this.value)" onchange="fluidConverter1(this.value)">
+                </p>
+                <p>oz <span class="output" id="outputOunces1"></span></p>
+                <p>cl <span class="output" id="outputCentilitres1"></span></p>
         </div>
         <!-- CONVERTER-3 -->
         <div class="convert-inner" id="centi">
             <h4>convert centilitres to mililitres and ounces</h3>
-            <p>
-                <label>cl</label>
-                <input class="input" id="inputCentilitres" type="number" min="0" placeholder="Centilitres"
-                oninput="fluidConverter2(this.value)" onchange="fluidConverter2(this.value)">
-              </p>
-              <p>ml<span class="output" id="outputMililitres2"></span></p>
-              <p>oz <span class="output" id="outputOunces2"></span></p>
+                <p>
+                    <label>cl</label>
+                    <input class="input" id="inputCentilitres" type="number" min="0" placeholder="Centilitres"
+                        oninput="fluidConverter2(this.value)" onchange="fluidConverter2(this.value)">
+                </p>
+                <p>ml<span class="output" id="outputMililitres2"></span></p>
+                <p>oz <span class="output" id="outputOunces2"></span></p>
         </div>
     </div>
-    
     <script src="/scripts/convert.js"></script>
 </body>
+
 </html>
