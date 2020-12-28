@@ -11,7 +11,7 @@ hamburger.addEventListener('click', () => {
 
 const cocktailIds = ['178314', '17230', '12198', '17233', '17196', '17194', '17253', '12402', '17207', '15941', '12196', '17213', '11690', '17180', '11113', '11009', '178325', '178336', '11008', '11118', '178340', '11004', '11006', '11001']
 var dayNumber = 0
-var drink 
+var drink
 const single_cocktail_container = document.getElementById('single-cocktail-container')
 const drinksArray = []
 let drinksMap = new Map();
@@ -24,23 +24,24 @@ function getCocktail() {
             .then(res => res.json())
             .then(data => {
                 const drink = data.drinks[0];
-                drinksMap.set(drink.idDrink,drink);
-            });      
+                drinksMap.set(drink.idDrink, drink);
+            });
     };
     // ONLY LET FLIP ON DAYS THAT ARE BEFORE NOW OR NOW
-    setTimeout(function(){
-        for(cocktailId of cocktailIds){
-        dayNumber += 1
-        var d = new Date().getDate();
-        // var d = 2;
-        if (dayNumber <= d) {
-            addCocktailToDOM(dayNumber,drinksMap.get(cocktailId), true);  
-        } 
-        else {
-            addCocktailToDOM(dayNumber,drinksMap.get(cocktailId), false);
-        }            
+    setTimeout(function () {
+        for (cocktailId of cocktailIds) {
+            dayNumber += 1
+            var d = new Date().getDate();
+            // comment 34 line and uncomment 36 line to see how it would work in December
+            // var d = 10;
+            if (dayNumber <= d) {
+                addCocktailToDOM(dayNumber, drinksMap.get(cocktailId), true);
+            }
+            else {
+                addCocktailToDOM(dayNumber, drinksMap.get(cocktailId), false);
+            }
         }
-        }, 1000);
+    }, 1000);
 }
 
 function addCocktailToDOM(dayNumber, drink, active) {
